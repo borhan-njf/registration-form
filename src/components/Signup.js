@@ -53,7 +53,7 @@ export default function Signup() {
   };
 
   useEffect(() => {
-    setError(validate(data));
+    setError(validate(data, "signup"));
   }, [data]);
 
   return (
@@ -163,7 +163,7 @@ export default function Signup() {
           )}
         </div>
         <div className={styles.formButtons}>
-          <a href="#">login</a>
+          <a href="#">Login</a>
           <button type="submit">Sign Up</button>
         </div>
         <ToastContainer />
