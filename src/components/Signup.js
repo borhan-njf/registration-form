@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { ToastContainer } from "react-toastify";
 import { notify } from "./toast";
 import { validate } from "./validate";
@@ -163,7 +164,7 @@ export default function Signup() {
           )}
         </div>
         <div className={styles.formButtons}>
-          <a href="#">Login</a>
+          <Link to="/login">Login</Link>
           <button type="submit">Sign Up</button>
         </div>
         <ToastContainer />
