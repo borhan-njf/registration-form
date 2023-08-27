@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { notify } from "./toast";
 import { validate } from "./validate";
+import styles from "./SignUp.module.css";
 
 export default function Signup() {
   const [data, setData] = useState({
@@ -37,7 +38,7 @@ export default function Signup() {
   const submitHandler = (event) => {
     event.preventDefault();
     if (!Object.keys(errors).length) {
-      notify("success", "ok, you will be in");
+      notify("success", "you signed up successfully");
       console.log("ok");
     } else {
       setTouched({
@@ -47,7 +48,7 @@ export default function Signup() {
         confirmPassword: true,
         isAccepted: true,
       });
-      notify("error", "sorry, you will not be in");
+      notify("error", "invalid data");
     }
   };
 
@@ -56,12 +57,19 @@ export default function Signup() {
   }, [data]);
 
   return (
-    <div>
-      <form onSubmit={submitHandler}>
-        <h1>Sign Up</h1>
-        <div>
-          <label for="name">name</label>
+    <div className={styles.container}>
+      <form onSubmit={submitHandler} className={styles.formContainer}>
+        <h1 className={styles.header}>Sign Up</h1>
+        <div className={styles.formField}>
+          <label for="name" className={styles.label}>
+            name
+          </label>
           <input
+            className={
+              errors.name && touched.name
+                ? styles.uncompleted
+                : styles.formInput
+            }
             type="text"
             name="name"
             id="name"
@@ -72,9 +80,16 @@ export default function Signup() {
           {errors.name && touched.name && <span>{errors.name}</span>}
         </div>
 
-        <div>
-          <label for="email">email</label>
+        <div className={styles.formField}>
+          <label for="email" className={styles.label}>
+            email
+          </label>
           <input
+            className={
+              errors.email && touched.email
+                ? styles.uncompleted
+                : styles.formInput
+            }
             type="email"
             name="email"
             id="email"
@@ -85,9 +100,16 @@ export default function Signup() {
           {errors.email && touched.email && <span>{errors.email}</span>}
         </div>
 
-        <div>
-          <label for="password">password</label>
+        <div className={styles.formField}>
+          <label for="password" className={styles.label}>
+            password
+          </label>
           <input
+            className={
+              errors.password && touched.password
+                ? styles.uncompleted
+                : styles.formInput
+            }
             type="password"
             name="password"
             id="password"
@@ -100,9 +122,16 @@ export default function Signup() {
           )}
         </div>
 
-        <div>
-          <label for="confirmPassword">confirm password</label>
+        <div className={styles.formField}>
+          <label for="confirmPassword" className={styles.label}>
+            confirm password
+          </label>
           <input
+            className={
+              errors.confirmPassword && touched.confirmPassword
+                ? styles.uncompleted
+                : styles.formInput
+            }
             type="password"
             name="confirmPassword"
             id="confirmPassword"
@@ -115,20 +144,26 @@ export default function Signup() {
           )}
         </div>
 
-        <div>
-          <label for="checkbox">i accept privacy policy</label>
-          <input
-            type="checkbox"
-            name="isAccepted"
-            id="checkbox"
-            onChange={changeHandler}
-            onFocus={focusHandler}
-          ></input>
+        <div className={styles.formField}>
+          <div className={styles.checkBoxContainer}>
+            <label for="checkbox" className={styles.label}>
+              I accept terms of privacy policy
+            </label>
+            <input
+              className={styles.formInput}
+              type="checkbox"
+              name="isAccepted"
+              id="checkbox"
+              onChange={changeHandler}
+              onFocus={focusHandler}
+            ></input>
+          </div>
           {errors.isAccepted && touched.isAccepted && (
             <span>{errors.isAccepted}</span>
           )}
         </div>
-        <div>
+        <div className={styles.formButtons}>
+          <a href="#">login</a>
           <button type="submit">Sign Up</button>
         </div>
         <ToastContainer />
